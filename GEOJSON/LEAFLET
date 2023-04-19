@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESTING geoJSON</title>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+<style>
+
+    body{
+        margin:0;
+        padding:0;
+    }
+    #map{
+        width:100%;
+        height:100vh;
+    }
+</style>
+
+</head>
+<body>
+    <div id= 'map'></div>
+    
+</body>
+</html>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script src="./provider/point.js"></script>
+<script src="./provider/line.js"></script>
+<script src="./provider/rectangle.js"></script>
+<script src="./provider/polygon.js"></script>
+
+<script>
+    var map = L.map('map').setView([11.0510, 76.0711], 13);
+
+var osm =L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+//osm.addTo(map);
+
+
+var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 18,
+	ext: 'png'
+});
+
+//tamen_Terrain.addTo(map)
+
+
+
+var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+});
+Stamen_Toner.addTo(map);
+
+
+googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+});
+
+googleStreets.addTo(map);
+
+//
+
+var singlemarker = L.marker([11.0510, 76.0711]).addTo(map);
+var popup = singlemarker.bindPopup('malapurum '+singlemarker.getLatLng()).openPopup()
+
+popup.addTo(map)
+
+
+console.log(singlemarker.toGeoJSON())
+
+//layer control
+
+var baseMaps = {
+    "osm": osm ,
+    "stamen_Toner map": Stamen_Terrain,
+    "stamen_Toner map": Stamen_Toner,
+    "googleStreets":googleStreets
+    
+};
+
+var overlayMaps = {
+    "marker": singlemarker
+};
+
+//map.removeLayer(osm)
+
+L.control.layers(baseMaps, overlayMaps,{ collapsed:false }).addTo(map);
+
+var geojson={
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              76.05996778888061,
+              11.057114131025202
+            ],
+            [
+              76.05996778888061,
+              11.024632936919673
+            ],
+            [
+              76.11575436669051,
+              11.024632936919673
+            ],
+            [
+              76.11575436669051,
+              11.057114131025202
+            ],
+            [
+              76.05996778888061,
+              11.057114131025202
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            76.14136191907983,
+            11.217345683529516
+          ],
+          [
+            76.11888567948927,
+            11.121713628457258
+          ],
+          [
+            76.10225506058475,
+            11.056947803234792
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            75.95467115290131,
+            11.139436581766262
+          ],
+          [
+            76.07426183109703,
+            11.056897473842639
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          75.9634411626514,
+          11.14608562025846
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          75.94829301008059,
+          11.134938591368694
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          76.11920469491145,
+          11.121405469423877
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          76.14106127334924,
+          11.21777166374379
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}
+
+L.geoJSON(geojson,{
+  onEachFeature:function(feature,layer){
+    layer.bindPopup(feature.properties.name)
+  }
+}).addTo(map)
+
+
+
+
+
+</script>
+
+
+
+
+
