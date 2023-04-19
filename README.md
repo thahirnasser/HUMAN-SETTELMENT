@@ -3,7 +3,7 @@ Understanding the allocation of resources in mallapuram. Reasons behind human mo
 
 ![Mallapuram_new_new_new](https://user-images.githubusercontent.com/90825034/233181255-986fb22a-ae1c-4f6c-b8d7-1a656ca39389.png)
 
-Line strings are connectionsthat passesthe main areas(markers)to showcase the movement towards the Mallapuam town.
+Line strings are connections that passes the main areas(markers)to showcase the movement towards the Mallapuam town.
 
 ![MANJERI-ROAD NETWORK-stamen](https://user-images.githubusercontent.com/90825034/233181580-5b32a051-ac2c-47c1-862b-334564f40ccd.png)
 Stamin_tonermap is integrated inside the web-application to get a context to the road network
