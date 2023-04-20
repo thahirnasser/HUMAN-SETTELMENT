@@ -1,4 +1,4 @@
-# HUMAN-SETTELMENT
+# HUMAN-SETTELMENT[OUTPUT]
 Understanding the allocation of resources in mallapuram. Reasons behind human movement towards Malappuram town. Portrayal of transportation routes and markers through leaflet platform.
 
 ![Mallapuram_new_new_new](https://user-images.githubusercontent.com/90825034/233181255-986fb22a-ae1c-4f6c-b8d7-1a656ca39389.png)
